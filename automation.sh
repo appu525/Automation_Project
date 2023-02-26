@@ -15,7 +15,7 @@ fi
 status=$(sudo systemctl status apache2.service)
 if [[ $status == *"active (running)"* ]]; then
 	echo "service is enabled"
-else sudo service apache2 restart
+else sudo systemctl enable apache2
 fi
 
 timestamp=$(date '+%d%m%Y-%H%M%S')
