@@ -1,21 +1,21 @@
 #!/bin/bash
 sudo apt update -y
 comm=$(dpkg --get-selections | grep apache)
-if [[ $comm == "apache" ]]; then
+if [[ $comm == *"apache"* ]]; then
         echo "apache2 is already installed"
 else sudo apt-get install apache2
 fi
 
 servstat=$(service apache2 status)
-if [[ $servstat == "active (running)" ]]; then
+if [[ $servstat == *"active (running)"* ]]; then
         echo "server is running"
 else sudo systemctl start apache2
 fi
 
 status=$(sudo systemctl status apache2.service)
-if [[ $status == "active (running)" ]]; then
+if [[ $status == *"active (running)"* ]]; then
         echo "service is enabled"
-else sudo service apache2 enable
+else sudo systemctl enable apache2
 fi
 
 
